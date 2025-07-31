@@ -36,19 +36,19 @@ export default function CompanyCircle() {
   }, []);
 
   return (
-    <div className="w-full flex justify-center items-center">
+    <div className="w-full flex justify-start sm:justify-center items-center">
       <motion.div
         initial={{ opacity: 0, x: 30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.3 }}
-        className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[400px] lg:h-[400px] mx-auto"
+        className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[400px] lg:h-[400px] -ml-4 sm:mx-auto"
       >
         {/* Central Logo - Fixed in center */}
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-white rounded-full flex items-center justify-center shadow-xl z-10 border-2 border-[#002B55]/20"
+          className="absolute top-[45%] left-[48%] transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-white rounded-full flex items-center justify-center shadow-xl z-10 border-2 border-[#002B55]/20"
           style={{
             filter: "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))",
           }}
