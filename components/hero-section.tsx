@@ -151,6 +151,11 @@ export function HeroSection() {
               </div>
             </motion.div>
 
+            {/* Separator Line - Mobile Only */}
+            <div className="lg:hidden w-full flex justify-center my-8">
+              <div className="w-32 h-px bg-gradient-to-r from-transparent via-[#A9111D]/50 to-transparent"></div>
+            </div>
+
             {/* CompanyCircle - Below Content on Mobile */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}

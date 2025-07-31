@@ -153,52 +153,46 @@ export function GrowthTimelineSection() {
               </div>
 
               {/* Desktop Layout - Alternating */}
-              <div className="hidden md:flex items-center">
-                {/* Content Card */}
-                <div
-                  className={`w-5/12 ${
-                    index % 2 === 0 ? "pr-12 text-right" : "pl-12 text-left"
-                  }`}
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.02, y: -5 }}
-                    transition={{ duration: 0.3 }}
-                    className="bg-white rounded-2xl p-8 shadow-xl border border-[#0C141F]/10 hover:shadow-2xl hover:border-[#A9111D]/20 transition-all duration-300"
-                  >
-                    {/* Year Badge */}
-                    <div
-                      className={`inline-flex items-center px-4 py-2 rounded-full text-white font-bold text-lg mb-4 bg-gradient-to-r ${item.color}`}
+              <div className="hidden md:flex items-center relative">
+                {/* Left Card (even indices) */}
+                {index % 2 === 0 && (
+                  <div className="w-5/12 pr-8 text-right">
+                    <motion.div
+                      whileHover={{ scale: 1.02, y: -5 }}
+                      transition={{ duration: 0.3 }}
+                      className="bg-white rounded-2xl p-8 shadow-xl border border-[#0C141F]/10 hover:shadow-2xl hover:border-[#A9111D]/20 transition-all duration-300"
                     >
-                      {item.year}
-                    </div>
+                      {/* Year Badge */}
+                      <div
+                        className={`inline-flex items-center px-4 py-2 rounded-full text-white font-bold text-lg mb-4 bg-gradient-to-r ${item.color}`}
+                      >
+                        {item.year}
+                      </div>
 
-                    {/* Title Badge */}
-                    <div className="inline-flex items-center px-3 py-1 rounded-full text-[#A9111D] text-sm font-medium border border-[#A9111D]/30 bg-[#A9111D]/5 mb-4">
-                      {item.title}
-                    </div>
+                      {/* Title Badge */}
+                      <div className="inline-flex items-center px-3 py-1 rounded-full text-[#A9111D] text-sm font-medium border border-[#A9111D]/30 bg-[#A9111D]/5 mb-4">
+                        {item.title}
+                      </div>
 
-                    {/* Event Description */}
-                    <h3 className="text-xl font-semibold text-[#0C141F] mb-3 leading-tight">
-                      {item.event}
-                    </h3>
+                      {/* Event Description */}
+                      <h3 className="text-xl font-semibold text-[#0C141F] mb-3 leading-tight">
+                        {item.event}
+                      </h3>
 
-                    {/* Impact Statement */}
-                    <p className="text-[#0C141F]/70 font-medium text-base">
-                      {item.impact}
-                    </p>
+                      {/* Impact Statement */}
+                      <p className="text-[#0C141F]/70 font-medium text-base">
+                        {item.impact}
+                      </p>
 
-                    {/* Decorative Element */}
-                    <div
-                      className={`w-12 h-1 bg-gradient-to-r ${
-                        item.color
-                      } rounded-full mt-4 ${
-                        index % 2 === 0 ? "ml-auto" : "mr-auto"
-                      }`}
-                    ></div>
-                  </motion.div>
-                </div>
+                      {/* Decorative Element */}
+                      <div
+                        className={`w-12 h-1 bg-gradient-to-r ${item.color} rounded-full mt-4 ml-auto`}
+                      ></div>
+                    </motion.div>
+                  </div>
+                )}
 
-                {/* Timeline Dot with Icon */}
+                {/* Center Timeline Dot with Icon */}
                 <motion.div
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
@@ -210,14 +204,53 @@ export function GrowthTimelineSection() {
                   <item.icon className="h-8 w-8 text-white" />
                 </motion.div>
 
-                {/* Connection Line to Card */}
-                <div
-                  className={`absolute top-1/2 w-12 h-px bg-gradient-to-r ${
-                    index % 2 === 0
-                      ? "right-1/2 mr-8 from-[#A9111D]/30 to-transparent"
-                      : "left-1/2 ml-8 from-transparent to-[#A9111D]/30"
-                  }`}
-                ></div>
+                {/* Connection Line to Left Card */}
+                {index % 2 === 0 && (
+                  <div className="absolute left-1/2 top-1/2 transform -translate-y-1/2 w-8 h-px bg-gradient-to-l from-[#A9111D]/30 to-transparent"></div>
+                )}
+
+                {/* Connection Line to Right Card */}
+                {index % 2 === 1 && (
+                  <div className="absolute left-1/2 top-1/2 transform -translate-y-1/2 w-8 h-px bg-gradient-to-r from-[#A9111D]/30 to-transparent"></div>
+                )}
+
+                {/* Right Card (odd indices) */}
+                {index % 2 === 1 && (
+                  <div className="absolute right-0 w-5/12 pl-8 text-left">
+                    <motion.div
+                      whileHover={{ scale: 1.02, y: -5 }}
+                      transition={{ duration: 0.3 }}
+                      className="bg-white rounded-2xl p-8 shadow-xl border border-[#0C141F]/10 hover:shadow-2xl hover:border-[#A9111D]/20 transition-all duration-300"
+                    >
+                      {/* Year Badge */}
+                      <div
+                        className={`inline-flex items-center px-4 py-2 rounded-full text-white font-bold text-lg mb-4 bg-gradient-to-r ${item.color}`}
+                      >
+                        {item.year}
+                      </div>
+
+                      {/* Title Badge */}
+                      <div className="inline-flex items-center px-3 py-1 rounded-full text-[#A9111D] text-sm font-medium border border-[#A9111D]/30 bg-[#A9111D]/5 mb-4">
+                        {item.title}
+                      </div>
+
+                      {/* Event Description */}
+                      <h3 className="text-xl font-semibold text-[#0C141F] mb-3 leading-tight">
+                        {item.event}
+                      </h3>
+
+                      {/* Impact Statement */}
+                      <p className="text-[#0C141F]/70 font-medium text-base">
+                        {item.impact}
+                      </p>
+
+                      {/* Decorative Element */}
+                      <div
+                        className={`w-12 h-1 bg-gradient-to-r ${item.color} rounded-full mt-4 mr-auto`}
+                      ></div>
+                    </motion.div>
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}
