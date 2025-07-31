@@ -1,20 +1,20 @@
-"use client"
-import type React from "react"
-import { motion } from "framer-motion"
-import { cn } from "@/lib/utils"
+"use client";
+import type React from "react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export const LampContainer = ({
   children,
   className,
 }: {
-  children: React.ReactNode
-  className?: string
+  children: React.ReactNode;
+  className?: string;
 }) => {
   return (
     <div
       className={cn(
         "relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#F8F9FB] w-full rounded-md z-0",
-        className,
+        className
       )}
     >
       <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 ">
@@ -71,7 +71,9 @@ export const LampContainer = ({
         <div className="absolute inset-auto z-50 h-44 w-[40rem] -translate-y-1/2 rounded-full bg-[#A9111D]/30 opacity-70 blur-[80px]"></div>
       </div>
 
-      <div className="relative z-50 flex -translate-y-80 flex-col items-center px-5 bg-transparent">{children}</div>
+      <div className="relative z-50 flex -translate-y-80 flex-col items-center px-5 bg-transparent">
+        {children}
+      </div>
     </div>
-  )
-}
+  );
+};

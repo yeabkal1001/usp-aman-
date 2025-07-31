@@ -22,7 +22,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full overflow-hidden bg-white pt-16 sm:pt-20"
+      className="relative min-h-screen w-full overflow-hidden bg-white pt-16 sm:pt-20 pb-16 sm:pb-20 lg:pb-24"
     >
       {/* Spotlight Effects */}
       <Spotlight
@@ -41,19 +41,7 @@ export function HeroSection() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           {/* Mobile Layout - Stacked */}
           <div className="lg:hidden w-full h-full flex flex-col items-center justify-center">
-            {/* CompanyCircle - Perfectly Centered on Mobile */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 1 }}
-              className="flex-1 flex items-center justify-center w-full"
-            >
-              <div className="w-full max-w-[320px] flex items-center justify-center">
-                <CompanyCircle />
-              </div>
-            </motion.div>
-
-            {/* Content - Below CompanyCircle on Mobile */}
+            {/* Content - Top on Mobile (Left Column Content) */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -160,6 +148,18 @@ export function HeroSection() {
                     </div>
                   </div>
                 </motion.div>
+              </div>
+            </motion.div>
+
+            {/* CompanyCircle - Below Content on Mobile */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 1 }}
+              className="flex-1 flex items-center justify-center w-full"
+            >
+              <div className="w-full max-w-[320px] flex items-center justify-center">
+                <CompanyCircle />
               </div>
             </motion.div>
           </div>

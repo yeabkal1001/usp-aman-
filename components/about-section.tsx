@@ -5,7 +5,22 @@ import { LampContainer } from "@/components/ui/lamp";
 export function AboutSection() {
   return (
     <section id="about" className="relative">
-      <LampContainer>
+      {/* Bold Red Light Effect at the Top */}
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-40 overflow-hidden">
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-red-500/80 rounded-full blur-2xl animate-pulse"></div>
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-64 h-64 bg-red-600/90 rounded-full blur-xl animate-pulse delay-300"></div>
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 bg-red-700/100 rounded-full blur-lg animate-pulse delay-600"></div>
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-red-800/100 rounded-full animate-pulse delay-900"></div>
+      </div>
+
+      {/* Additional Bold Red Glowing Background Effects */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -left-40 w-80 h-80 bg-red-500/60 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -top-20 -right-20 w-60 h-60 bg-red-600/70 rounded-full blur-2xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/4 w-40 h-40 bg-red-400/65 rounded-full blur-xl animate-pulse delay-500"></div>
+      </div>
+
+      <LampContainer className="bg-white">
         <motion.div
           initial={{ opacity: 0.5, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -33,8 +48,14 @@ export function AboutSection() {
       </LampContainer>
 
       {/* Corporate Overview with Real Images */}
-      <div className="bg-white py-12 sm:py-16 lg:py-20 xl:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="bg-white py-12 sm:py-16 lg:py-20 xl:py-32 relative">
+        {/* Additional Bold Red Glow Effects for the content section */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/3 right-0 w-32 h-32 bg-red-500/50 rounded-full blur-2xl animate-pulse delay-700"></div>
+          <div className="absolute bottom-1/4 left-0 w-24 h-24 bg-red-600/60 rounded-full blur-xl animate-pulse delay-300"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Mission, Vision, Values Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 mb-12 sm:mb-16 lg:mb-20">
             {/* Mission */}
@@ -45,7 +66,7 @@ export function AboutSection() {
               viewport={{ once: true }}
               className="group"
             >
-              <div className="h-full p-6 sm:p-8 border border-[#0C141F]/10 hover:border-[#A9111D]/30 transition-all duration-300">
+              <div className="h-full p-6 sm:p-8 border border-[#0C141F]/10 hover:border-[#A9111D]/30 transition-all duration-300 bg-white/80 backdrop-blur-sm">
                 <div className="mb-4 sm:mb-6">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#A9111D]/10 rounded flex items-center justify-center mb-3 sm:mb-4">
                     <div className="w-5 h-5 sm:w-6 sm:h-6 bg-[#A9111D] rounded"></div>
@@ -92,7 +113,7 @@ export function AboutSection() {
               viewport={{ once: true }}
               className="group"
             >
-              <div className="h-full p-6 sm:p-8 border border-[#0C141F]/10 hover:border-[#A9111D]/30 transition-all duration-300">
+              <div className="h-full p-6 sm:p-8 border border-[#0C141F]/10 hover:border-[#A9111D]/30 transition-all duration-300 bg-white/80 backdrop-blur-sm">
                 <div className="mb-4 sm:mb-6">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#A9111D]/10 rounded flex items-center justify-center mb-3 sm:mb-4">
                     <div className="w-5 h-5 sm:w-6 sm:h-6 bg-[#A9111D] rounded"></div>
@@ -139,7 +160,7 @@ export function AboutSection() {
               viewport={{ once: true }}
               className="group"
             >
-              <div className="h-full p-6 sm:p-8 border border-[#0C141F]/10 hover:border-[#A9111D]/30 transition-all duration-300">
+              <div className="h-full p-6 sm:p-8 border border-[#0C141F]/10 hover:border-[#A9111D]/30 transition-all duration-300 bg-white/80 backdrop-blur-sm">
                 <div className="mb-4 sm:mb-6">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#A9111D]/10 rounded flex items-center justify-center mb-3 sm:mb-4">
                     <div className="w-5 h-5 sm:w-6 sm:h-6 bg-[#A9111D] rounded"></div>
@@ -179,9 +200,15 @@ export function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="bg-[#0C141F] rounded-lg p-6 sm:p-8 lg:p-12"
+            className="bg-[#0C141F] rounded-lg p-6 sm:p-8 lg:p-12 relative overflow-hidden"
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 text-center">
+            {/* Bold Red glow effect inside the dark stats section */}
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/60 rounded-full blur-xl"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-red-600/70 rounded-full blur-lg"></div>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 text-center relative z-10">
               <div>
                 <div className="text-2xl sm:text-3xl lg:text-4xl font-light text-[#A9111D] mb-1 sm:mb-2">
                   25+
