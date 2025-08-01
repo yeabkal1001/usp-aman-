@@ -1,6 +1,10 @@
 "use client";
+
 import { motion } from "framer-motion";
 import { Car, Building, Globe, Trophy, Users, TrendingUp } from "lucide-react";
+
+// Custom pattern for mixed timeline layout (true = right side, false = left side)
+const timelineLayout = [true, false, true, false, true, false];
 
 const timeline = [
   {
@@ -99,11 +103,11 @@ export function GrowthTimelineSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="relative mb-8 sm:mb-12 lg:mb-16"
+              className="relative mb-6 sm:mb-8 lg:mb-10"
             >
               {/* Mobile Layout - Centered */}
               <div className="md:hidden">
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center relative">
                   {/* Timeline Dot with Icon */}
                   <motion.div
                     initial={{ scale: 0 }}
@@ -111,9 +115,39 @@ export function GrowthTimelineSection() {
                     transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
                     viewport={{ once: true }}
                     whileHover={{ scale: 1.1 }}
-                    className={`w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br ${item.color} rounded-full border-4 border-white shadow-xl flex items-center justify-center z-10 cursor-pointer mb-4`}
+                    className={`w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br ${item.color} rounded-full border-4 border-white shadow-xl flex items-center justify-center z-10 cursor-pointer mb-4 relative`}
                   >
                     <item.icon className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
+
+                    {/* Pulsing Ring Animation - Mobile */}
+                    <motion.div
+                      initial={{ scale: 1, opacity: 0.7 }}
+                      animate={{ scale: 1.5, opacity: 0 }}
+                      transition={{
+                        duration: 2,
+                        repeat: Number.POSITIVE_INFINITY,
+                        ease: "easeOut",
+                      }}
+                      className={`absolute inset-0 rounded-full bg-gradient-to-br ${item.color} -z-10`}
+                    />
+                  </motion.div>
+
+                  {/* Animated Connection Line - Mobile (Vertical) */}
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    whileInView={{ height: "24px", opacity: 1 }}
+                    transition={{ duration: 0.8, delay: index * 0.1 + 0.5 }}
+                    viewport={{ once: true }}
+                    className="absolute top-12 sm:top-14 left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-[#A9111D] to-[#A9111D]/30 z-20"
+                  >
+                    {/* Animated Dot - Mobile */}
+                    <motion.div
+                      initial={{ y: 0, opacity: 0 }}
+                      whileInView={{ y: 16, opacity: 1 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 + 0.8 }}
+                      viewport={{ once: true }}
+                      className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#A9111D] rounded-full shadow-lg"
+                    />
                   </motion.div>
 
                   {/* Content Card */}
@@ -152,105 +186,163 @@ export function GrowthTimelineSection() {
                 </div>
               </div>
 
-              {/* Desktop Layout - Alternating */}
-              <div className="hidden md:flex items-center relative">
-                {/* Left Card (even indices) */}
-                {index % 2 === 0 && (
-                  <div className="w-5/12 pr-8 text-right">
+              {/* Desktop Layout - Mixed Arrangement */}
+              <div className="hidden md:block">
+                <div className="flex items-center">
+                  {/* Left Side Content */}
+                  <div className="w-[45%] relative">
+                    {!timelineLayout[index] && (
+                      <>
+                        <motion.div
+                          whileHover={{ scale: 1.02, y: -5 }}
+                          transition={{ duration: 0.3 }}
+                          className="bg-white rounded-2xl p-8 shadow-xl border border-[#0C141F]/10 hover:shadow-2xl hover:border-[#A9111D]/20 transition-all duration-300"
+                        >
+                          {/* Year Badge */}
+                          <div
+                            className={`inline-flex items-center px-4 py-2 rounded-full text-white font-bold text-lg mb-4 bg-gradient-to-r ${item.color}`}
+                          >
+                            {item.year}
+                          </div>
+
+                          {/* Title Badge */}
+                          <div className="inline-flex items-center px-3 py-1 rounded-full text-[#A9111D] text-sm font-medium border border-[#A9111D]/30 bg-[#A9111D]/5 mb-4">
+                            {item.title}
+                          </div>
+
+                          {/* Event Description */}
+                          <h3 className="text-xl font-semibold text-[#0C141F] mb-3 leading-tight">
+                            {item.event}
+                          </h3>
+
+                          {/* Impact Statement */}
+                          <p className="text-[#0C141F]/70 font-medium text-base">
+                            {item.impact}
+                          </p>
+
+                          {/* Decorative Element */}
+                          <div
+                            className={`w-12 h-1 bg-gradient-to-r ${item.color} rounded-full mt-4`}
+                          ></div>
+                        </motion.div>
+
+                        {/* Animated Connection Line - Left to Center */}
+                        <motion.div
+                          initial={{ width: 0, opacity: 0 }}
+                          whileInView={{ width: "48px", opacity: 1 }}
+                          transition={{
+                            duration: 0.8,
+                            delay: index * 0.1 + 0.5,
+                          }}
+                          viewport={{ once: true }}
+                          className="absolute top-1/2 -translate-y-1/2 -right-12 h-0.5 bg-gradient-to-r from-[#A9111D] to-[#A9111D]/30 z-20"
+                        >
+                          {/* Animated Dot */}
+                          <motion.div
+                            initial={{ x: 0, opacity: 0 }}
+                            whileInView={{ x: 40, opacity: 1 }}
+                            transition={{
+                              duration: 0.6,
+                              delay: index * 0.1 + 0.8,
+                            }}
+                            viewport={{ once: true }}
+                            className="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-[#A9111D] rounded-full shadow-lg"
+                          />
+                        </motion.div>
+                      </>
+                    )}
+                  </div>
+
+                  {/* Center Timeline Dot with Icon */}
+                  <div className="flex flex-col items-center w-[10%] mx-4 relative z-30">
                     <motion.div
-                      whileHover={{ scale: 1.02, y: -5 }}
-                      transition={{ duration: 0.3 }}
-                      className="bg-white rounded-2xl p-8 shadow-xl border border-[#0C141F]/10 hover:shadow-2xl hover:border-[#A9111D]/20 transition-all duration-300"
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.1 }}
+                      className={`w-16 h-16 bg-gradient-to-br ${item.color} rounded-full border-4 border-white shadow-xl flex items-center justify-center z-10 cursor-pointer relative`}
                     >
-                      {/* Year Badge */}
-                      <div
-                        className={`inline-flex items-center px-4 py-2 rounded-full text-white font-bold text-lg mb-4 bg-gradient-to-r ${item.color}`}
-                      >
-                        {item.year}
-                      </div>
+                      <item.icon className="h-8 w-8 text-white" />
 
-                      {/* Title Badge */}
-                      <div className="inline-flex items-center px-3 py-1 rounded-full text-[#A9111D] text-sm font-medium border border-[#A9111D]/30 bg-[#A9111D]/5 mb-4">
-                        {item.title}
-                      </div>
-
-                      {/* Event Description */}
-                      <h3 className="text-xl font-semibold text-[#0C141F] mb-3 leading-tight">
-                        {item.event}
-                      </h3>
-
-                      {/* Impact Statement */}
-                      <p className="text-[#0C141F]/70 font-medium text-base">
-                        {item.impact}
-                      </p>
-
-                      {/* Decorative Element */}
-                      <div
-                        className={`w-12 h-1 bg-gradient-to-r ${item.color} rounded-full mt-4 ml-auto`}
-                      ></div>
+                      {/* Pulsing Ring Animation */}
+                      <motion.div
+                        initial={{ scale: 1, opacity: 0.7 }}
+                        animate={{ scale: 1.5, opacity: 0 }}
+                        transition={{
+                          duration: 2,
+                          repeat: Number.POSITIVE_INFINITY,
+                          ease: "easeOut",
+                        }}
+                        className={`absolute inset-0 rounded-full bg-gradient-to-br ${item.color} -z-10`}
+                      />
                     </motion.div>
                   </div>
-                )}
 
-                {/* Center Timeline Dot with Icon */}
-                <motion.div
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.1 }}
-                  className={`absolute left-1/2 transform -translate-x-1/2 w-16 h-16 bg-gradient-to-br ${item.color} rounded-full border-4 border-white shadow-xl flex items-center justify-center z-10 cursor-pointer`}
-                >
-                  <item.icon className="h-8 w-8 text-white" />
-                </motion.div>
+                  {/* Right Side Content */}
+                  <div className="w-[45%] relative">
+                    {timelineLayout[index] && (
+                      <>
+                        {/* Animated Connection Line - Center to Right */}
+                        <motion.div
+                          initial={{ width: 0, opacity: 0 }}
+                          whileInView={{ width: "48px", opacity: 1 }}
+                          transition={{
+                            duration: 0.8,
+                            delay: index * 0.1 + 0.5,
+                          }}
+                          viewport={{ once: true }}
+                          className="absolute top-1/2 -translate-y-1/2 -left-12 h-0.5 bg-gradient-to-r from-[#A9111D]/30 to-[#A9111D] z-20"
+                        >
+                          {/* Animated Dot */}
+                          <motion.div
+                            initial={{ x: "100%", opacity: 0 }}
+                            whileInView={{ x: 8, opacity: 1 }}
+                            transition={{
+                              duration: 0.6,
+                              delay: index * 0.1 + 0.8,
+                            }}
+                            viewport={{ once: true }}
+                            className="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-[#A9111D] rounded-full shadow-lg"
+                          />
+                        </motion.div>
 
-                {/* Connection Line to Left Card */}
-                {index % 2 === 0 && (
-                  <div className="absolute left-1/2 top-1/2 transform -translate-y-1/2 w-8 h-px bg-gradient-to-l from-[#A9111D]/30 to-transparent"></div>
-                )}
+                        <motion.div
+                          whileHover={{ scale: 1.02, y: -5 }}
+                          transition={{ duration: 0.3 }}
+                          className="bg-white rounded-2xl p-8 shadow-xl border border-[#0C141F]/10 hover:shadow-2xl hover:border-[#A9111D]/20 transition-all duration-300"
+                        >
+                          {/* Year Badge */}
+                          <div
+                            className={`inline-flex items-center px-4 py-2 rounded-full text-white font-bold text-lg mb-4 bg-gradient-to-r ${item.color}`}
+                          >
+                            {item.year}
+                          </div>
 
-                {/* Connection Line to Right Card */}
-                {index % 2 === 1 && (
-                  <div className="absolute left-1/2 top-1/2 transform -translate-y-1/2 w-8 h-px bg-gradient-to-r from-[#A9111D]/30 to-transparent"></div>
-                )}
+                          {/* Title Badge */}
+                          <div className="inline-flex items-center px-3 py-1 rounded-full text-[#A9111D] text-sm font-medium border border-[#A9111D]/30 bg-[#A9111D]/5 mb-4">
+                            {item.title}
+                          </div>
 
-                {/* Right Card (odd indices) */}
-                {index % 2 === 1 && (
-                  <div className="absolute right-0 w-5/12 pl-8 text-left">
-                    <motion.div
-                      whileHover={{ scale: 1.02, y: -5 }}
-                      transition={{ duration: 0.3 }}
-                      className="bg-white rounded-2xl p-8 shadow-xl border border-[#0C141F]/10 hover:shadow-2xl hover:border-[#A9111D]/20 transition-all duration-300"
-                    >
-                      {/* Year Badge */}
-                      <div
-                        className={`inline-flex items-center px-4 py-2 rounded-full text-white font-bold text-lg mb-4 bg-gradient-to-r ${item.color}`}
-                      >
-                        {item.year}
-                      </div>
+                          {/* Event Description */}
+                          <h3 className="text-xl font-semibold text-[#0C141F] mb-3 leading-tight">
+                            {item.event}
+                          </h3>
 
-                      {/* Title Badge */}
-                      <div className="inline-flex items-center px-3 py-1 rounded-full text-[#A9111D] text-sm font-medium border border-[#A9111D]/30 bg-[#A9111D]/5 mb-4">
-                        {item.title}
-                      </div>
+                          {/* Impact Statement */}
+                          <p className="text-[#0C141F]/70 font-medium text-base">
+                            {item.impact}
+                          </p>
 
-                      {/* Event Description */}
-                      <h3 className="text-xl font-semibold text-[#0C141F] mb-3 leading-tight">
-                        {item.event}
-                      </h3>
-
-                      {/* Impact Statement */}
-                      <p className="text-[#0C141F]/70 font-medium text-base">
-                        {item.impact}
-                      </p>
-
-                      {/* Decorative Element */}
-                      <div
-                        className={`w-12 h-1 bg-gradient-to-r ${item.color} rounded-full mt-4 mr-auto`}
-                      ></div>
-                    </motion.div>
+                          {/* Decorative Element */}
+                          <div
+                            className={`w-12 h-1 bg-gradient-to-r ${item.color} rounded-full mt-4 ml-auto`}
+                          ></div>
+                        </motion.div>
+                      </>
+                    )}
                   </div>
-                )}
+                </div>
               </div>
             </motion.div>
           ))}
